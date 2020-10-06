@@ -8,12 +8,12 @@ SLACK_TOKEN = ENV['SLACK_TOKEN']
 
 def user_list
   url = "https://slack.com/api/users.list"
-  puts HTTParty.get(url, token: SLACK_TOKEN)
+  return HTTParty.get(url, query: {token: SLACK_TOKEN})
 end
 
 def channel_list
   url = "https://slack.com/api/conversations.list"
-  puts HTTParty.get(url, token: SLACK_TOKEN)
+  return HTTParty.get(url, query: {token: SLACK_TOKEN})
 end
 
 def main
@@ -26,9 +26,9 @@ def main
 
   loop do
     if input == "list users" || input == "1"
-      return user_list
+      puts user_list
     elsif input == "list channels" || input == "2"
-      return channel_list
+      puts channel_list
     elsif input == "quit" || input == "3"
       break
     else

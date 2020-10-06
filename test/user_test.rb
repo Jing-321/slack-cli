@@ -10,7 +10,7 @@ describe "Initializer" do
   end
 
   it "username must be a string" do
-    expect(@user1.user_name).must_be_kind_of String
+    expect(@user1.name).must_be_kind_of String
   end
 
   it "real name must be a string" do

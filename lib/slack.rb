@@ -32,8 +32,6 @@ def main
   puts "Welcome to the Ada Slack CLI!"
   workspace = Workspace.new
 
-
-
   loop do
     puts "What would you like to do with CLI? \n1. list users \n2. list channels \n3. quit"
     input = gets.chomp

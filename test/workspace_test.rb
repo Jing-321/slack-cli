@@ -1,20 +1,22 @@
 require_relative 'test_helper'
 
 describe "Initializer" do
+  before do
+    VCR.use_cassette("list_all_users_and_channels_for_workspace") do
+      @workspace1 = Workspace.new
+    end
+  end
+
   it "is an instance of Workspace" do
-    expect(Workspace.new).must_be_kind_of Workspace
+    expect(@workspace1).must_be_kind_of Workspace
   end
 
-  it "uses must be an empty array" do
-    workspace1 = Workspace.new
-    expect(workspace1.users).must_be_kind_of Array
-    expect(workspace1.users).must_be_empty
+  it "uses must be an array" do
+    expect(@workspace1.users).must_be_kind_of Array
   end
 
-  it "channels must be an empty array" do
-    workspace1 = Workspace.new
-    expect(workspace1.channels).must_be_kind_of Array
-    expect(workspace1.channels).must_be_empty
+  it "channels must be an array" do
+    expect(@workspace1.channels).must_be_kind_of Array
   end
 
 end

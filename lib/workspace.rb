@@ -8,7 +8,7 @@ class Workspace
   attr_accessor :selected
 
   def initialize(users: [], channels: [], selected: nil)
-    @users = User.new(1,"a","ada").list_all
+    @users = User.list_all
     @channels = Channel.list_all
     @selected = selected
 
@@ -16,5 +16,3 @@ class Workspace
 
 
 end
-
-tp Workspace.new

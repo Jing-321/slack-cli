@@ -25,6 +25,15 @@ describe "Initializer" do
     expect(@channel1.member_count).must_be_kind_of Integer
   end
 
+  it "raise error when slack is or name is missing" do
+    expect{Channel.new(123)}.must_raise ArgumentError
+    expect{Channel.new(name: "Totoro")}.must_raise ArgumentError
+  end
+
+  it "raise error when topic or member count is missing" do
+    expect{Channel.new(123, "Totoro", member_count: 5)}.must_raise ArgumentError
+    expect{Channel.new(123, "snacks", "ice cream")}.must_raise ArgumentError
+  end
 end
 
 describe "list_all" do

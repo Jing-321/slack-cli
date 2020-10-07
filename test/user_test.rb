@@ -21,6 +21,15 @@ describe "Initializer" do
     expect(@user1.slack_id).must_be_kind_of Integer
   end
 
+  it "raise error when slack is or name is missing" do
+    expect{User.new(123)}.must_raise ArgumentError
+    expect{User.new(name: "Totoro")}.must_raise ArgumentError
+  end
+
+  it "raise error when real name is missing" do
+    expect{User.new(123, "Totoro")}.must_raise ArgumentError
+  end
+
 end
 
 describe "list_all" do

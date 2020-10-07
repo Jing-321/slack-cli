@@ -14,10 +14,10 @@ def main
     input = gets.chomp
 
     if input == "list users" || input == "1"
-      tp user_list
+      tp workspace.users
       puts "\n\n"
     elsif input == "list channels" || input == "2"
-      tp channel_list
+      tp workspace.channels
       puts "\n\n"
     elsif input == "quit" || input == "3"
       break

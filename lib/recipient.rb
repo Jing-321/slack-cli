@@ -1,5 +1,5 @@
 require 'httparty'
-require_relative 'workspace'
+#require_relative 'workspace'
 require 'dotenv'
 require 'table_print'
 
@@ -14,7 +14,7 @@ class Recipient
     @slack_id = slack_id
     @name = name
 
-  raise ArgumentError, "slack ID and name are required." unless slack_id || name
+    raise ArgumentError, "slack ID and name are required." unless slack_id || name
   end
 
   def self.get(url)

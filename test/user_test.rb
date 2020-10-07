@@ -26,15 +26,24 @@ end
 describe "list_all" do
 
   it "should return all the users" do
-    expect(User.list_all.length).must_be 5
+    VCR.use_cassette("list_all_users") do
+      response = User.list_all
+      expect(response.length).must_equal 5
+    end
   end
 
   it "return the correct info for the first" do
-    expect(User.list_all.first.name).must_be "slackbot"
+    VCR.use_cassette("list_all_users") do
+      response = User.list_all
+      expect(response.first.name).must_equal "slackbot"
+    end
   end
 
   it "return the correct info for the last" do
-    expect(User.list_all.last.name).must_be "api_project"
+    VCR.use_cassette("list_all_users") do
+      response = User.list_all
+      expect(response.last.name).must_equal "api_project"
+    end
   end
 
 end

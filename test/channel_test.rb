@@ -30,15 +30,26 @@ end
 describe "list_all" do
 
   it "should return all the channels" do
-    expect(Channel.list_all.length).must_be 3
+    VCR.use_cassette("list_all_channels") do
+      response = Channel.list_all
+
+      expect(response.length).must_equal 3
+    end
+
   end
 
   it "return the correct info for the first" do
-    expect(Channel.list_all.first.name).must_be "random"
+    VCR.use_cassette("list_all_channels") do
+      response = Channel.list_all
+      expect(response.first.name).must_equal "random"
+    end
   end
 
   it "return the correct info for the last" do
-    expect(Channel.list_all.last.name).must_be "slack-cli"
+    VCR.use_cassette("list_all_channels") do
+      response = Channel.list_all
+      expect(response.last.name).must_equal "slack-cli"
+    end
   end
 
 end

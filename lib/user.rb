@@ -20,4 +20,4 @@ class User < Recipient
   end
 end
 
-tp User.list_all
+

@@ -7,27 +7,70 @@ require 'table_print'
 
 def main
   puts "Welcome to the Ada Slack CLI!"
-  workspace = Workspace.new
+  @workspace = Workspace.new
 
   loop do
-    puts "What would you like to do with CLI? \n1. list users \n2. list channels \n3. quit"
+    puts "What would you like to do with CLI? \n1. list users \n2. list channels \n3. select user \n4. select channel \n5. detail\n  (about the selected user or channel) \n6. quit"
     input = gets.chomp
 
-    if input == "list users" || input == "1"
-      tp workspace.users
+    case input
+    when "list users", "1"
+      tp @workspace.users
       puts "\n\n"
-    elsif input == "list channels" || input == "2"
-      tp workspace.channels
+    when "list channels", "2"
+      tp @workspace.channels
       puts "\n\n"
-    elsif input == "quit" || input == "3"
+    when "select user", "3"
+      select_a_user
+    when "select channel", "4"
+      select_a_channel
+    when "detail", "5"
+      tp @workspace.selected
+      puts "\n\n"
+    when "quit", "6"
       break
-    else
-      puts "Please choose one of the options."
     end
   end
 
 
   puts "Thank you for using the Ada Slack CLI"
 end
+
+def select_a_user
+  loop do
+    puts "What's the user's slack id or username? enter 6 or quit to exit."
+    id_or_name = gets.chomp
+    if id_or_name == "6" || id_or_name == "quit"
+      break
+    end
+    begin
+      @workspace.select_user(id_or_name)
+    rescue Exception
+      puts "Please enter a valid username or id.\n\n"
+    else
+      puts "Ok, #{id_or_name} is selected.\n\n"
+      break
+    end
+  end
+end
+
+def select_a_channel
+  loop do
+    puts "What's the channel's slack id or username? enter 6 or quit to exit."
+    id_or_name = gets.chomp
+    if id_or_name == "6" || id_or_name == "quit"
+      break
+    end
+    begin
+      @workspace.select_channel(id_or_name)
+    rescue Exception
+      puts "Please enter a valid channel name or id.\n\n"
+    else
+      puts "Ok, #{id_or_name} is selected.\n\n"
+      break
+    end
+  end
+end
+
 
 main if __FILE__ == $PROGRAM_NAME

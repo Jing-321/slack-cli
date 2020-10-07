@@ -22,3 +22,19 @@ describe "Initializer" do
   end
 
 end
+
+describe "list_all" do
+
+  it "should return all the users" do
+    expect(User.list_all.length).must_be 5
+  end
+
+  it "return the correct info for the first" do
+    expect(User.list_all.first.name).must_be "slackbot"
+  end
+
+  it "return the correct info for the last" do
+    expect(User.list_all.last.name).must_be "api_project"
+  end
+
+end

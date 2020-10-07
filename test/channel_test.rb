@@ -26,3 +26,19 @@ describe "Initializer" do
   end
 
 end
+
+describe "list_all" do
+
+  it "should return all the channels" do
+    expect(Channel.list_all.length).must_be 3
+  end
+
+  it "return the correct info for the first" do
+    expect(Channel.list_all.first.name).must_be "random"
+  end
+
+  it "return the correct info for the last" do
+    expect(Channel.list_all.last.name).must_be "slack-cli"
+  end
+
+end

@@ -13,6 +13,8 @@ class Recipient
   def initialize(slack_id, name)#should we get rid of name????
     @slack_id = slack_id
     @name = name
+
+  raise ArgumentError, "slack ID and name are required." unless slack_id || name
   end
 
   def self.get(url)
@@ -22,4 +24,6 @@ class Recipient
   def self.list_all
     raise NotImplementedError, 'Implement me in a child class!'
   end
+
+
 end

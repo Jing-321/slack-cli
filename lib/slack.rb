@@ -4,29 +4,6 @@ require_relative 'workspace'
 require 'dotenv'
 require 'table_print'
 
-Dotenv.load
-SLACK_TOKEN = ENV['SLACK_TOKEN']
-
-def user_list
-  url = "https://slack.com/api/users.list"
-  response = HTTParty.get(url, query: {token: SLACK_TOKEN})
-  users = []
-  response["members"].each do |member|
-    users << {name: member["name"], real_name: member["real_name"], id: member["id"]}
-  end
-
-  return users
-end
-
-def channel_list
-  url = "https://slack.com/api/conversations.list"
-  response = HTTParty.get(url, query: {token: SLACK_TOKEN})
-  channels = []
-  response["channels"].each do |channel|
-    channels << {channel_name: channel["name"], topic: channel["topic"]["value"], member_count: channel["num_members"], slack_ID: channel["id"]}
-  end
-  return channels
-end
 
 def main
   puts "Welcome to the Ada Slack CLI!"

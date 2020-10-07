@@ -6,6 +6,8 @@ class User < Recipient
   def initialize(slack_id, name, real_name)
     super(slack_id, name)   #super(name)?????
     @real_name = real_name
+
+    #raise ArgumentError, "real name is required." unless real_name
   end
 
   def self.list_all
@@ -18,5 +20,4 @@ class User < Recipient
   end
 end
 
-#???????????
- User.list_all.each { |user| puts user.name }
+tp User.new(1, "a", "ada").list_all

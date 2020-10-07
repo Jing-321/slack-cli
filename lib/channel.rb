@@ -7,6 +7,8 @@ class Channel < Recipient
     super(slack_id, name)
     @topic = topic
     @member_count = member_count
+
+    raise ArgumentError, "slack ID, name, topic, and member count are all required." unless topic || member_count
   end
 
   def self.list_all
@@ -19,5 +21,3 @@ class Channel < Recipient
   end
 
 end
-
-Channel.list_all.each {|channel| puts channel.name}

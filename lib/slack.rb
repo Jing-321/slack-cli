@@ -10,7 +10,7 @@ def main
   @workspace = Workspace.new
 
   loop do
-    puts "What would you like to do with CLI? \n1. list users \n2. list channels \n3. select user \n4. select channel \n5. detail\n  (about the selected user or channel) \n6. send message \n7. quit"
+    puts "************** What would you like to do with CLI? ************ \n1. list users \n2. list channels \n3. select user \n4. select channel \n5. detail\n  (about the selected user or channel) \n6. send message \n7. quit"
     input = gets.chomp
 
     case input

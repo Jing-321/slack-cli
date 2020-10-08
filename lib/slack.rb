@@ -10,7 +10,7 @@ def main
   @workspace = Workspace.new
 
   loop do
-    puts "************** What would you like to do with CLI? ************ \n1. list users \n2. list channels \n3. select user \n4. select channel \n5. detail\n  (about the selected user or channel) \n6. send message \n7. quit"
+    puts "(～￣▽￣)～ What would you like to do with CLI? ～(￣▽￣～) \n1. list users \n2. list channels \n3. select user \n4. select channel \n5. detail\n  (about the selected user or channel) \n6. send message \n7. quit"
     input = gets.chomp
 
     case input
@@ -26,6 +26,7 @@ def main
       select_a_channel
     when "detail", "5"
       if @workspace.selected == nil
+        puts "ヽ(ˋДˊ)ノ"
         puts "Please select a user or channel first!"
         puts "\n\n"
       else
@@ -36,8 +37,10 @@ def main
       write_message
       puts "\n\n"
     when "quit", "7"
+      puts "乀(ˉεˉ乀) bye~"
       break
     else
+      puts "ヽ(ˋДˊ)ノ"
       puts "Please enter one of the menu items or their corresponding number values."
       puts "\n\n"
     end
@@ -48,15 +51,15 @@ end
 
 def write_message
   if @workspace.selected == nil
-  puts "Please select a user or channel first!"
+  puts "ヽ(ˋДˊ)ノ \nPlease select a user or channel first!"
   else
   puts "What is your message?"
   message = gets.chomp
   if message == ""
-    puts "No message was inputted."
+    puts "ヽ(ˋДˊ)ノ \nNo message was inputted."
     return false
   end
-  puts "Ok, we sent off your message!" if @workspace.send_message(message).parsed_response["ok"] == true
+  puts "ヽ(ˋ▽ˊ)ノ \nOk, we sent off your message!" if @workspace.send_message(message).parsed_response["ok"] == true
   end
 end
 
@@ -70,9 +73,9 @@ def select_a_user
     begin
       @workspace.select_user(id_or_name)
     rescue Exception
-      puts "Please enter a valid username or id.\n\n"
+      puts "ヽ(ˋДˊ)ノ \nPlease enter a valid username or id.\n\n"
     else
-      puts "Ok, #{id_or_name} is selected.\n\n"
+      puts "ヽ(ˋ▽ˊ)ノ \nOk, #{id_or_name} is selected.\n\n"
       break
     end
   end
@@ -88,9 +91,9 @@ def select_a_channel
     begin
       @workspace.select_channel(id_or_name)
     rescue Exception
-      puts "Please enter a valid channel name or id.\n\n"
+      puts "ヽ(ˋДˊ)ノ \nPlease enter a valid channel name or id.\n\n"
     else
-      puts "Ok, #{id_or_name} is selected.\n\n"
+      puts "ヽ(ˋ▽ˊ)ノ \nOk, #{id_or_name} is selected.\n\n"
       break
     end
   end

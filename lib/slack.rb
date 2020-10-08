@@ -25,34 +25,46 @@ def main
     when "select channel", "4"
       select_a_channel
     when "detail", "5"
-      tp @workspace.selected
-      puts "\n\n"
+      if @workspace.selected == nil
+        puts "Please select a user or channel first!"
+        puts "\n\n"
+      else
+        tp @workspace.selected
+        puts "\n\n"
+      end
     when "send message", "6"
       write_message
       puts "\n\n"
     when "quit", "7"
       break
+    else
+      puts "Please enter one of the menu items or their corresponding number values."
+      puts "\n\n"
     end
   end
-
 
   puts "Thank you for using the Ada Slack CLI"
 end
 
 def write_message
+  if @workspace.selected == nil
+  puts "Please select a user or channel first!"
+  else
   puts "What is your message?"
   message = gets.chomp
-  if message == nil
+  if message == ""
+    puts "No message was inputted."
     return false
   end
   puts "Ok, we sent off your message!" if @workspace.send_message(message).parsed_response["ok"] == true
+  end
 end
 
 def select_a_user
   loop do
-    puts "What's the user's slack id or username? enter 6 or quit to exit."
+    puts "What's the user's slack id or username? enter 7 or quit to exit."
     id_or_name = gets.chomp
-    if id_or_name == "6" || id_or_name == "quit"
+    if id_or_name == "7" || id_or_name == "quit"
       break
     end
     begin
@@ -68,9 +80,9 @@ end
 
 def select_a_channel
   loop do
-    puts "What's the channel's slack id or username? enter 6 or quit to exit."
+    puts "What's the channel's slack id or username? enter 7 or quit to exit."
     id_or_name = gets.chomp
-    if id_or_name == "6" || id_or_name == "quit"
+    if id_or_name == "7" || id_or_name == "quit"
       break
     end
     begin

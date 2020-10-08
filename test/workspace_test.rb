@@ -48,9 +48,16 @@ describe "send_message" do
     end
   end
 
-  it "successfully sends a message" do
-    VCR.use_cassette("send_message") do
-    expect(@workspace1.send_message(@message).parsed_response["ok"]).must_equal true
+  it "successfully sends a message to a channel" do
+    VCR.use_cassette("send_message_to_channel") do
+      expect(@workspace1.send_message(@message).parsed_response["ok"]).must_equal true
+    end
+  end
+
+  it "successfully sends a message to a user" do
+    VCR.use_cassette("send_message_to_user") do
+      @workspace1.selected = Recipient.new("U01C10G57NE","rencarothers")
+      expect(@workspace1.send_message(@message).parsed_response["ok"]).must_equal true
     end
   end
 

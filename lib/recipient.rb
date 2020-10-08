@@ -26,6 +26,7 @@ class Recipient
   end
 
   def self.send_message(slack_id, message)
+    raise Exception.new("message is required") if message == nil
     url = "https://slack.com/api/chat.postMessage"
     response = HTTParty.post(
         url,

@@ -45,7 +45,7 @@ def write_message
   if message == nil
     return false
   end
-  puts "Ok, we sent off your message!" if @workspace.send_message(message)
+  puts "Ok, we sent off your message!" if @workspace.send_message(message).parsed_response["ok"] == true
 end
 
 def select_a_user

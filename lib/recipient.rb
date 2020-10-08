@@ -25,5 +25,22 @@ class Recipient
     raise NotImplementedError, 'Implement me in a child class!'
   end
 
+  def self.send_message(slack_id, message)
+    url = "https://slack.com/api/chat.postMessage"
+    response = HTTParty.post(
+        url,
+        body: {
+            token: SLACK_TOKEN,
+            text: message,
+            channel: slack_id
+        },
+    headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
+    )
+    if response.code != 200 || response.parsed_response["ok"] == false
+      raise Exception.new("Http request code #{response.code} error #{response.parsed_response["error"]}")
+    end
+    return response
+  end
+
 
 end

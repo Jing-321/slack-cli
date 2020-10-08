@@ -28,6 +28,11 @@ class Workspace
     return @selected
   end
 
+  def send_message(message)
+    raise Exception.new("nothing selected, please select a user/channel to send to first!") if @selected == nil
+    channel = @selected.slack_id
+    Recipient.send_message(channel, message)
+    return true
+  end
 end
 
-p Workspace.new.select_user("slackbot")

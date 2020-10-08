@@ -20,3 +20,48 @@ describe "Initializer" do
   end
 
 end
+
+describe "select user or channel" do
+  before do
+    VCR.use_cassette("list_all_users_and_channels_for_workspace") do
+      @workspace1 = Workspace.new
+    end
+  end
+  it "return correct user" do
+    expect(@workspace1.select_user("yjlin789")).must_be_kind_of User
+    expect(@workspace1.select_user("yjlin789").name).must_equal "yjlin789"
+    expect(@workspace1.select_user("USLACKBOT").name).must_equal "slackbot"
+  end
+  it "return correct channel" do
+    expect(@workspace1.select_channel("random")).must_be_kind_of Channel
+    expect(@workspace1.select_channel("random").name).must_equal "random"
+    expect(@workspace1.select_channel("C01C761G84U").name).must_equal "general"
+  end
+end
+
+describe "send_message" do
+  before do
+    VCR.use_cassette("list_all_users_and_channels_for_workspace") do
+      @workspace1 = Workspace.new
+      @message = "Test Message"
+      @workspace1.selected = Recipient.new("C01C16GNVMZ","random")
+    end
+  end
+
+  it "successfully sends a message" do
+    VCR.use_cassette("send_message") do
+    expect(@workspace1.send_message(@message).parsed_response["ok"]).must_equal true
+    end
+  end
+
+  it "raise an error if message is nil" do
+    @message = nil
+    expect{@workspace1.send_message(@message)}.must_raise Exception
+  end
+
+  it "if user or channel is not selected, raises an error" do
+    @workspace1.selected = nil
+    expect{@workspace1.send_message(@message)}.must_raise Exception
+  end
+
+end
